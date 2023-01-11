@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Quiz Do Futuro</title>
+    <style>
+      body {
+        background-color: #121c21;
+        color: white;
+        font-family: sans-serif;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        height: 100vh;
+      }
+      img {
+        margin-bottom: 80px;
+      }
+      h1 {
+        text-align: center;
+        font-size: 24px;
+      }
+      button {
+        font-size: 24px;
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 20px 15px;
+        cursor: pointer;
+        color: white;
+        text-align: left;
+        background: #121c21;
+        border: 4px, solid;
+        border-image-slice: 1;
+        border-image-source: linear-gradient(
+          0deg,
+          #f7dc11 0%,
+          #f0a81a 25%,
+          #e4801d 50%,
+          #d85116 75%,
+          #b50d13 100%
+        );
+      }
+      button:hover {
+        font-size: 24px;
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 20px 15px;
+        cursor: pointer;
+        color: white;
+        text-align: left;
+        background: linear-gradient(
+          0deg,
+          #f7dc11 0%,
+          #f0a81a 25%,
+          #e4801d 50%,
+          #d85116 75%,
+          #b50d13 100%
+        );
+        border: 4px, solid;
+        border-image-slice: 1;
+        border-image-source: linear-gradient(
+          0deg,
+          #f7dc11 0%,
+          #f0a81a 25%,
+          #e4801d 50%,
+          #d85116 75%,
+          #b50d13 100%
+        );
+      }
+      p {
+        font-size: 24px;
+      }
+      .escondido {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="logo-quiz-do-futuro.png" />
+
+    <div class="pergunta-1" onclick="checarResposta(event)">
+      <h1>PARA TRABALHAR COM PROGRAMAÇÃO EU PRECISO</h1>
+      <button>Ser uma pessoa boa em matemática</button>
+      <button>Ter usado computadores desde criança e jogar vídeo games</button>
+      <button class="opcao-certa">
+        Gostar de resolver problemas e trabalhar em equipe
+      </button>
+    </div>
+    <div class="escondido pergunta-2" onclick="checarResposta(event)">
+      <h1>PARA TRABALHAR COM PROGRAMAÇÃO EU PRECISO: 2</h1>
+      <button>Ser uma pessoa boa em matemática</button>
+      <button>Ter usado computadores desde criança e jogar vídeo games</button>
+      <button class="opcao-certa">
+        Gostar de resolver problemas e trabalhar em equipe
+      </button>
+    </div>
+    <div class="escondido pergunta-3" onclick="checarResposta(event)">
+      <h1>PARA TRABALHAR COM PROGRAMAÇÃO EU PRECISO: 3</h1>
+      <button>Ser uma pessoa boa em matemática</button>
+      <button>Ter usado computadores desde criança e jogar vídeo games</button>
+      <button class="opcao-certa">
+        Gostar de resolver problemas e trabalhar em equipe
+      </button>
+    </div>
+    <div class="escondido pergunta-4" onclick="checarResposta(event)">
+      <h1>PARA TRABALHAR COM PROGRAMAÇÃO EU PRECISO: 4</h1>
+      <button>Ser uma pessoa boa em matemática</button>
+      <button>Ter usado computadores desde criança e jogar vídeo games</button>
+      <button class="opcao-certa">
+        Gostar de resolver problemas e trabalhar em equipe
+      </button>
+    </div>
+    <div class="escondido pergunta-5" onclick="checarResposta(event)">
+      <h1>PARA TRABALHAR COM PROGRAMAÇÃO EU PRECISO: 5</h1>
+      <button>Ser uma pessoa boa em matemática</button>
+      <button>Ter usado computadores desde criança e jogar vídeo games</button>
+      <button class="opcao-certa">
+        Gostar de resolver problemas e trabalhar em equipe
+      </button>
+    </div>
+    <div class="resultado escondido">
+      <h1>PARABÉNS!</h1>
+      <h1>VOCÊ ACERTOU <span class="acertos"></span> DE 5 PERGUNTAS</h1>
+      <button onclick="voltarParaOFuturo()">voltar para o início</button>
+    </div>
+
+    <p>
+      <strong><span class="perguntaAtual">1</span>/5</strong>
+    </p>
+    <script>
+      const ultimaPergunta = 5;
+      let quantidadeDeAcertos = 0;
+      let perguntaAtual = 1;
+      function checarResposta(event) {
+        const tagDoElemento = event.target.tagName;
+        if (tagDoElemento !== "BUTTON") {
+          return;
+        }
+        const classeDoBotao = event.target.className;
+        const classeOpcaoCerta = "opcao-certa";
+
+        if (classeDoBotao === classeOpcaoCerta) {
+          quantidadeDeAcertos++;
+        }
+
+        const divPerguntaAtual = document.querySelector(
+          ".pergunta-" + perguntaAtual
+        );
+        divPerguntaAtual.classList.add("escondido");
+
+        perguntaAtual++;
+
+        if (perguntaAtual > ultimaPergunta) {
+          const divResultado = document.querySelector(".resultado");
+          divResultado.classList.remove("escondido");
+
+          const textoAcertos = document.querySelector(".acertos");
+          textoAcertos.innerText = quantidadeDeAcertos;
+          return;
+        }
+
+        const divProximaPergunta = document.querySelector(
+          ".pergunta-" + perguntaAtual
+        );
+        divProximaPergunta.classList.remove("escondido");
+        const textoPerguntaAtual = document.querySelector(".perguntaAtual");
+        textoPerguntaAtual.innerText = perguntaAtual;
+      }
+      function voltarParaOFuturo() {
+        quantidadeDeAcertos = 0;
+        perguntaAtual = 1;
+
+        const divProximaPergunta = document.querySelector(
+          ".pergunta-" + perguntaAtual
+        );
+        divProximaPergunta.classList.remove("escondido");
+
+        const textoPerguntaAtual = document.querySelector(".perguntaAtual");
+        textoPerguntaAtual.innerText = perguntaAtual;
+
+        const divResultado = document.querySelector(".resultado");
+        divResultado.classList.add("escondido");
+      }
+    </script>
+  </body>
+</html>
